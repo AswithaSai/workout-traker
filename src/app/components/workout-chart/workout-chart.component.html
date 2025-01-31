@@ -1,1 +1,10 @@
-<p>workout-chart works!</p>
+<div class="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-xl font-bold mb-4">Workout Progress Chart</h2>
+
+    <!-- Select dropdown bound to selectedUser -->
+    <select [(ngModel)]="selectedUser" (change)="updateChart()" class="w-full p-2 border rounded mb-4">
+        <option *ngFor="let user of workouts" [ngValue]="user">{{ user.name }}</option>
+    </select>
+
+    <canvas id="workoutChart" class="w-full"></canvas>
+</div>

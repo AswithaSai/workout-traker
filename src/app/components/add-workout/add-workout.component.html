@@ -1,1 +1,19 @@
-<p>add-workout works!</p>
+<div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-xl font-bold mb-4">Add Workout</h2>
+
+    <input type="text" [(ngModel)]="userName" placeholder="User Name" class="w-full p-2 mb-2 border rounded" />
+
+    <select [(ngModel)]="workoutType" class="w-full p-2 mb-2 border rounded">
+        <option value="">Select Workout Type</option>
+        <option value="Running">Running</option>
+        <option value="Cycling">Cycling</option>
+        <option value="Yoga">Yoga</option>
+        <option value="Swimming">Swimming</option>
+    </select>
+
+    <input type="number" [(ngModel)]="workoutMinutes" placeholder="Minutes" class="w-full p-2 mb-2 border rounded" />
+
+    <button (click)="addWorkout()" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700">
+        Add Workout
+    </button>
+</div>
