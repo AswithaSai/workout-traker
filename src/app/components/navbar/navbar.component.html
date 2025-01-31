@@ -1,0 +1,12 @@
+<nav class="bg-blue-500 p-4 flex justify-between items-center text-white shadow-md">
+  <h1 class="text-lg font-bold">Health Challenge Tracker</h1>
+  
+  <div>
+    <button (click)="onOpenModal()" class="bg-white text-blue-500 px-4 py-2 rounded-md shadow-md hover:bg-gray-200">
+      Add Workout
+    </button>
+    <button (click)="onToggleCharts()" class="ml-4 bg-white text-blue-500 px-4 py-2 rounded-md shadow-md hover:bg-gray-200">
+      {{ toggleButtonText }}
+    </button>
+  </div>
+</nav>

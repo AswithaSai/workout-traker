@@ -1,37 +1,48 @@
-<div class="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
-    <h2 class="text-xl font-bold mb-4">Workout List</h2>
+<div class="bg-white shadow-md rounded-lg p-6">
+  <h2 class="text-xl font-bold mb-4">Workout List</h2>
 
-    <div class="flex space-x-2 mb-4">
-        <input type="text" [(ngModel)]="searchQuery" placeholder="Search by name" class="w-1/2 p-2 border rounded" />
+  <!-- Search and Filter -->
+  <div class="flex mb-4">
+    <input type="text" [(ngModel)]="searchQuery" (input)="applyFilters()" placeholder="Search by name"
+      class="p-2 border border-gray-300 rounded-lg mr-4 w-1/2">
+    
+    <select [(ngModel)]="selectedWorkoutType" (change)="applyFilters()"
+      class="p-2 border border-gray-300 rounded-lg w-1/2">
+      <option value="">All Workouts</option>
+      <option *ngFor="let type of ['Running', 'Cycling', 'Yoga', 'Swimming', 'Weight Training']" [value]="type">
+        {{ type }}
+      </option>
+    </select>
+  </div>
 
-        <select [(ngModel)]="selectedWorkoutType" class="w-1/2 p-2 border rounded">
-            <option value="All">All</option>
-            <option value="Running">Running</option>
-            <option value="Cycling">Cycling</option>
-            <option value="Yoga">Yoga</option>
-            <option value="Swimming">Swimming</option>
-        </select>
-    </div>
+  <!-- Workout Table -->
+  <table class="w-full border-collapse border border-gray-300">
+    <thead>
+      <tr class="bg-blue-500 text-white">
+        <th class="p-2 border">User Name</th>
+        <th class="p-2 border">Workout Type</th>
+        <th class="p-2 border">Minutes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let workout of displayedWorkouts" class="text-center">
+        <td class="p-2 border">{{ workout.name }}</td>
+        <td class="p-2 border">{{ workout.type }}</td>
+        <td class="p-2 border">{{ workout.minutes }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-    <table class="w-full border-collapse border border-gray-300">
-        <thead>
-            <tr class="bg-gray-200">
-                <th class="border border-gray-300 p-2">Name</th>
-                <th class="border border-gray-300 p-2">Workouts</th>
-                <th class="border border-gray-300 p-2">Count</th>
-                <th class="border border-gray-300 p-2">Total Minutes</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of getFilteredWorkouts()" class="text-center hover:bg-gray-100">
-                <td class="border border-gray-300 p-2">{{ user.name }}</td>
-                <td class="border border-gray-300 p-2">
-                    {{ getWorkoutTypes(user) }}
-                </td>
-                <td class="border border-gray-300 p-2"></td>
-                <td class="border border-gray-300 p-2"></td>
-            </tr>
-
-        </tbody>
-    </table>
+  <!-- Pagination -->
+  <div class="mt-4 flex justify-between">
+    <button (click)="changePage(-1)" [disabled]="currentPage === 1"
+      class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400">
+      Previous
+    </button>
+    <span>Page {{ currentPage }}</span>
+    <button (click)="changePage(1)" [disabled]="currentPage * itemsPerPage >= allWorkouts.length"
+      class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400">
+      Next
+    </button>
+  </div>
 </div>

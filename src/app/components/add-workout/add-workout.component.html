@@ -1,19 +1,31 @@
-<div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-    <h2 class="text-xl font-bold mb-4">Add Workout</h2>
+<div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-96 border-2 border-black-500"> <!-- ✅ TEMPORARY BORDER -->
+    <h2 class="text-xl font-bold mb-4">Add New Workout</h2>
 
-    <input type="text" [(ngModel)]="userName" placeholder="User Name" class="w-full p-2 mb-2 border rounded" />
+    <!-- User Name -->
+    <label class="block mb-2 text-gray-700">User Name</label>
+    <input type="text" [(ngModel)]="userName"
+      class="w-full p-2 border border-gray-300 rounded-lg mb-3 focus:ring-2 focus:ring-blue-500">
 
-    <select [(ngModel)]="workoutType" class="w-full p-2 mb-2 border rounded">
-        <option value="">Select Workout Type</option>
-        <option value="Running">Running</option>
-        <option value="Cycling">Cycling</option>
-        <option value="Yoga">Yoga</option>
-        <option value="Swimming">Swimming</option>
+    <!-- Workout Type -->
+    <label class="block mb-2 text-gray-700">Workout Type</label>
+    <select [(ngModel)]="workoutType"
+      class="w-full p-2 border border-gray-300 rounded-lg mb-3 focus:ring-2 focus:ring-blue-500">
+      <option value="" disabled selected>Select a workout</option>
+      <option *ngFor="let type of workoutTypes" [value]="type">{{ type }}</option>
     </select>
 
-    <input type="number" [(ngModel)]="workoutMinutes" placeholder="Minutes" class="w-full p-2 mb-2 border rounded" />
+    <!-- Workout Minutes -->
+    <label class="block mb-2 text-gray-700">Workout Minutes</label>
+    <input type="number" [(ngModel)]="workoutMinutes"
+      class="w-full p-2 border border-gray-300 rounded-lg mb-3 focus:ring-2 focus:ring-blue-500">
 
-    <button (click)="addWorkout()" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700">
-        Add Workout
-    </button>
+    <!-- Buttons -->
+    <div class="flex justify-end">
+      <button (click)="close.emit()"
+        class="bg-gray-400 text-white px-4 py-2 rounded-lg mr-2 hover:bg-gray-500">Cancel</button>
+      <button (click)="addWorkout()"
+        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Add Workout</button>
+    </div>
+  </div>
 </div>

@@ -1,5 +1,18 @@
-<div class="min-h-screen bg-gray-100 flex flex-col items-center space-y-6 p-6">
-  <app-add-workout></app-add-workout>
-  <app-workout-list></app-workout-list>
-  <app-workout-chart></app-workout-chart>
+<!-- Navbar -->
+<app-navbar [toggleButtonText]="toggleButtonText" 
+            (toggleCharts)="toggleCharts()" 
+            (openModal)="openModal()">
+</app-navbar>
+
+<div class="container mx-auto p-4">
+  
+
+  <!-- Workout List (Default View) -->
+  <app-workout-list *ngIf="!showCharts"></app-workout-list>
+
+  <!-- Workout Charts (Toggled) -->
+  <app-workout-chart *ngIf="showCharts"></app-workout-chart>
 </div>
+
+<!-- Add Workout Modal (Outside Container to Avoid Layout Issues) -->
+<app-add-workout *ngIf="showModal" (close)="closeModal()"(workoutAdded)="updateWorkouts()"></app-add-workout>

@@ -1,38 +1,70 @@
 import { Component, OnInit } from '@angular/core';
-import { WorkoutService } from '../../services/workout.service';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';  // Import CommonModule
+
+interface Workout {
+  type: string;
+  minutes: number;
+}
+
+interface User {
+  id: number;
+  name: string;
+  workouts: Workout[];
+}
 
 @Component({
   selector: 'app-workout-list',
-  standalone: true,  // Marking as standalone
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './workout-list.component.html',
-  styleUrls: ['./workout-list.component.css'],
-  imports: [FormsModule, CommonModule],  // Add CommonModule here
+  styleUrls: ['./workout-list.component.css']
 })
 export class WorkoutListComponent implements OnInit {
-  workouts: any[] = [];
-  searchQuery: string = '';
-  selectedWorkoutType: string = 'All';
-
-  constructor(private workoutService: WorkoutService) {}
+  allWorkouts: { name: string; type: string; minutes: number }[] = [];
+  displayedWorkouts: { name: string; type: string; minutes: number }[] = [];
+  searchQuery = '';
+  selectedWorkoutType = '';
+  currentPage = 1;
+  itemsPerPage = 5;
 
   ngOnInit() {
-    this.workouts = this.workoutService.getWorkouts();
+    this.loadWorkouts();
   }
 
-  getWorkoutTypes(user: any): string {
-    return user.workouts?.map((w: { type: string }) => w.type).join(', ') || ''; // Default to empty string
+  loadWorkouts() {
+    const users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
+
+    // ✅ Convert users into a flat workout list
+    this.allWorkouts = users.flatMap(user =>
+      user.workouts.map(workout => ({
+        name: user.name,
+        type: workout.type,
+        minutes: workout.minutes
+      }))
+    );
+
+    this.applyFilters();
   }
 
-  getFilteredWorkouts() {
-    return this.workouts
-      .filter((user) =>
-        user.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-      )
-      .filter((user) =>
-        this.selectedWorkoutType === 'All' ||
-        user.workouts?.some((w: { type: string }) => w.type === this.selectedWorkoutType)
+  applyFilters() {
+    let filtered = this.allWorkouts;
+
+    if (this.searchQuery) {
+      filtered = filtered.filter(workout =>
+        workout.name.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
+    }
+
+    if (this.selectedWorkoutType) {
+      filtered = filtered.filter(workout => workout.type === this.selectedWorkoutType);
+    }
+
+    this.displayedWorkouts = filtered.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
+  }
+
+  changePage(direction: number) {
+    this.currentPage += direction;
+    this.applyFilters();
   }
 }

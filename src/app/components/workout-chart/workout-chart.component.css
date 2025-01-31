@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+ul li {
+  list-style: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+ul li:hover {
+  background-color: #e2e8f0;
+}
+
+ul li.bg-gray-300 {
+  font-weight: bold;
+}
