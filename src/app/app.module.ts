@@ -16,8 +16,8 @@ import { AddWorkoutComponent } from './components/add-workout/add-workout.compon
   imports: [BrowserModule,
     FormsModule,
     NavbarComponent,
-    AddWorkoutComponent, // Standalone component added here
-    WorkoutListComponent, // Standalone component added here
+    AddWorkoutComponent, 
+    WorkoutListComponent, 
     WorkoutChartComponent 
   ],
   providers: [],

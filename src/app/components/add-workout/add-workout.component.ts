@@ -26,17 +26,17 @@ export class AddWorkoutComponent {
 
     let users = JSON.parse(localStorage.getItem('users') || '[]');
 
-    // ✅ Check if user already exists
+   
     let existingUser = users.find((user: any) => user.name.toLowerCase() === this.userName.toLowerCase());
 
     if (existingUser) {
-      // ✅ Add new workout to existing user
+     
       existingUser.workouts.push({
         type: this.workoutType,
         minutes: this.workoutMinutes
       });
     } else {
-      // ✅ Create new user with workout list
+      
       const newUser = {
         id: new Date().getTime(),
         name: this.userName,
@@ -50,11 +50,11 @@ export class AddWorkoutComponent {
       users.push(newUser);
     }
 
-    // ✅ Store only `users` in localStorage, removing old `workouts`
+   
     localStorage.setItem('users', JSON.stringify(users));
-    localStorage.removeItem('workouts'); // 🚀 Delete old structure
+    localStorage.removeItem('workouts'); 
 
-    // ✅ Clear form
+   
     this.userName = '';
     this.workoutType = '';
     this.workoutMinutes = null;

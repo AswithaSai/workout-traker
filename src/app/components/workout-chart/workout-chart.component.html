@@ -1,5 +1,5 @@
 <div class="container mx-auto p-6 flex gap-6">
-  <!-- User List (Left Panel) -->
+  
   <div class="w-1/4 bg-white shadow-md rounded-lg p-4">
     <h3 class="text-lg font-semibold mb-4">Users</h3>
     <ul class="divide-y divide-gray-300">
@@ -12,17 +12,16 @@
     </ul>
   </div>
 
-  <!-- Chart Display (Right Panel) -->
   <div class="w-3/4 bg-white shadow-md rounded-lg p-6">
     <h2 class="text-2xl font-bold mb-4">{{ selectedUser }}'s Workout Progress</h2>
 
-    <!-- Toggle Chart Button -->
+
     <button (click)="toggleChartType()" 
             class="mb-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
       Switch to {{ chartType === 'bar' ? 'Pie Chart' : 'Bar Chart' }}
     </button>
 
-    <!-- Dynamic Chart -->
+
     <div style="width: 800px; height: 600px;">
       <canvas baseChart
               [data]="chartType === 'bar' ? barChartData : pieChartData"

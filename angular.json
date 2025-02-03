@@ -15,6 +15,7 @@
           "options": {
             "outputPath": "dist/workout-tracker",
             "index": "src/index.html",
+            "karmaConfig":"./karma.conf.js",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"

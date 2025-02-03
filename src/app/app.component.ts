@@ -8,11 +8,12 @@ import { AddWorkoutComponent } from './components/add-workout/add-workout.compon
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, WorkoutListComponent, WorkoutChartComponent, AddWorkoutComponent], // ✅ Fix: Import CommonModule
+  imports: [CommonModule, NavbarComponent, WorkoutListComponent, WorkoutChartComponent, AddWorkoutComponent], 
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title = 'workout-tracker';
   showCharts = false;
   showModal = false;
 
@@ -22,7 +23,7 @@ export class AppComponent {
     this.initializeData();
   }
 
-  // ✅ Function to initialize default workout data
+ 
 initializeData() {
   if (!localStorage.getItem('users')) {
     const defaultUsers = [

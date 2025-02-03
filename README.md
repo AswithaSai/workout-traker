@@ -52,6 +52,11 @@ For end-to-end (e2e) testing, run:
 ng e2e
 ```
 
+## Code Coverage Report
+
+- The code coverage report for the project is available at [coverage/index.html](coverage/index.html).
+- You can open this file in your browser to view the details of the code coverage.
+
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
 ## Additional Resources

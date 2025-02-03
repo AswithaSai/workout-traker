@@ -12,12 +12,12 @@ export class NavbarComponent {
   @Output() openModal = new EventEmitter<void>();
 
   onToggleCharts() {
-    console.log('View Charts Clicked'); // ✅ Log Click Event
+    console.log('View Charts Clicked');
     this.toggleCharts.emit();
   }
 
   onOpenModal() {
-    console.log('Add Workout Clicked'); // ✅ Log Click Event
+    console.log('Add Workout Clicked'); 
     this.openModal.emit();
   }
 }

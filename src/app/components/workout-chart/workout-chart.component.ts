@@ -15,7 +15,7 @@ interface User {
   workouts: Workout[];
 }
 
-Chart.register(...registerables); // Register Chart.js controllers
+Chart.register(...registerables); 
 
 @Component({
   selector: 'app-workout-chart',
@@ -26,11 +26,11 @@ Chart.register(...registerables); // Register Chart.js controllers
 })
 export class WorkoutChartComponent implements OnInit {
   users: User[] = [];
-  selectedUser: string = 'John Doe'; // Default user selection
-  chartType: ChartType = 'bar'; // Define chartType (default: bar chart)
+  selectedUser: string = 'John Doe'; 
+  chartType: ChartType = 'bar'; 
 
   barChartData!: ChartData<'bar'>;
-  pieChartData!: ChartData<'pie'>; // Define pieChartData
+  pieChartData!: ChartData<'pie'>; 
   chartOptions = { responsive: true };
 
   ngOnInit() {
@@ -47,7 +47,6 @@ export class WorkoutChartComponent implements OnInit {
     this.generateCharts();
   }
 
-  // Method to toggle between Bar Chart and Pie Chart
   toggleChartType() {
     this.chartType = this.chartType === 'bar' ? 'pie' : 'bar';
   }

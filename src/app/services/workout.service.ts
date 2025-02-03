@@ -1,3 +1,4 @@
+// workout.service.ts
 import { Injectable } from '@angular/core';
 
 interface Workout {
@@ -18,30 +19,37 @@ interface User {
 export class WorkoutService {
   private workouts: User[] = [];
 
-  addWorkout(userName: string, workoutType: string, workoutMinutes: number) {
-    const existingUser = this.workouts.find((user) => user.name === userName);
+  constructor() {}
 
-    if (existingUser) {
-      const workoutEntry = existingUser.workouts.find(
-        (w) => w.type === workoutType
-      );
-      if (workoutEntry) {
-        workoutEntry.minutes += workoutMinutes;
-      } else {
-        existingUser.workouts.push({ type: workoutType, minutes: workoutMinutes });
-      }
-      existingUser.totalMinutes += workoutMinutes;
-      existingUser.workoutCount++;
-    } else {
-      this.workouts.push({
-        name: userName,
-        workouts: [{ type: workoutType, minutes: workoutMinutes }],
-        totalMinutes: workoutMinutes,
-        workoutCount: 1,
-      });
-    }
+  // Method to add a workout for a user
+  addWorkout(userName: string, workoutType: string, workoutMinutes: number): void {
+  if (workoutMinutes <= 0) {
+    return; // Ignore invalid input
   }
 
+  let user = this.workouts.find(u => u.name === userName);
+
+  if (!user) {
+    user = {
+      name: userName,
+      workouts: [],
+      totalMinutes: 0,
+      workoutCount: 0,
+    };
+    this.workouts.push(user);
+  }
+
+  user.workouts.push({
+    type: workoutType,
+    minutes: workoutMinutes,
+  });
+
+  user.totalMinutes += workoutMinutes;
+  user.workoutCount += 1;
+}
+
+
+  // Method to get all workouts
   getWorkouts(): User[] {
     return this.workouts;
   }

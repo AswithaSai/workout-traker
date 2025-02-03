@@ -35,7 +35,7 @@ export class WorkoutListComponent implements OnInit {
   loadWorkouts() {
     const users: User[] = JSON.parse(localStorage.getItem('users') || '[]');
 
-    // ✅ Convert users into a flat workout list
+    
     this.allWorkouts = users.flatMap(user =>
       user.workouts.map(workout => ({
         name: user.name,
@@ -63,8 +63,16 @@ export class WorkoutListComponent implements OnInit {
     this.displayedWorkouts = filtered.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
   }
 
-  changePage(direction: number) {
-    this.currentPage += direction;
-    this.applyFilters();
+ changePage(direction: number) {
+  const newPage = this.currentPage + direction;
+  const maxPage = Math.ceil(this.allWorkouts.length / this.itemsPerPage);
+
+  if (newPage < 1 || newPage > maxPage) {
+    return; // Prevent out-of-bounds page change
   }
+
+  this.currentPage = newPage;
+  this.applyFilters();
+}
+
 }
